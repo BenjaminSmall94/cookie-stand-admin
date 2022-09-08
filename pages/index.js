@@ -1,11 +1,23 @@
 import Head from 'next/head'
+import { stringify } from 'postcss';
+import { useSate, useState } from 'react'
 
 
 export default function Home() {
 
+  const [last_stand, setLastStand] = useState('Last Cookie Stand')
+
   function handleSubmit(e) {
-    e.preventDefault()
-    alert('hi')
+    e.preventDefault();
+    const formResponse = {
+      "location": e.target.location.value,
+      "minCustomers": parseInt(e.target.min_cust.value),
+      "maxCustomers": parseInt(e.target.max_cust.value),
+      "avgCookies": parseInt(e.target.avg_cookies.value)
+    }
+    setLastStand(JSON.stringify(formResponse))
+    // setLastStand(`{"location":"${e.target.location.value}","minCustomers":${e.target.min_cust.value},"maxCustomers":${e.target.max_cust.value},"avgCookies":${e.target.avg_cookies.value}}`);
+    e.target.reset();
   }
 
   return (
@@ -16,7 +28,7 @@ export default function Home() {
       <Header />
       <main>
         <CookieForm onSubmit={handleSubmit} />
-        <CookieReport />
+        <CookieReport stand={last_stand} />
       </main>
       <Footer copyright="2022" />
     </div>
@@ -41,36 +53,36 @@ function Footer(props) {
 
 function CookieForm(props) {
   return (
-    <form onSubmit={props.onSubmit} className="w-1/2 mx-auto my-3 bg-green-300">
-      <h2 className='text-4xl p-3.5 text-center'>Create Cookie Stand</h2>
+    <form onSubmit={props.onSubmit} className="w-1/2 min-w-max mx-auto my-3 bg-green-300 rounded">
+      <h2 className='text-2xl p-3.5 text-center'>Create Cookie Stand</h2>
       <div className='flex'>
-        <label htmlFor="location" className='m-1'>Location</label>
+        <label htmlFor="location" className='ml-5 mr-2'>Location</label>
         <input type="text" placeholder='City Name' name="location" className='flex-auto mr-2 ml-1' required />
       </div>
-      <div className='flex py-2 w-100%'>
-        <div className='inline-block mx-2'>
-          <label htmlFor="min-cust" className='block'>Minimum Customers per Hour</label>
-          <input type="number" name='min-cust' className='block mx-auto' required />
+      <div className='flex py-2'>
+        <div className='flex-auto mx-2'>
+          <label htmlFor="min_cust" className='block text-center'>Minimum Customers per Hour</label>
+          <input type="number" name='min_cust' className='block mx-auto' required />
         </div>
-        <div className='inline-block mx-2'>
-          <label htmlFor="max-cust" className='block'>Maximum Customers per Hour</label>
-          <input type="number" name='max-cust' className='block mx-auto' required />
+        <div className='flex-auto mx-2'>
+          <label htmlFor="max_cust" className='block text-center'>Maximum Customers per Hour</label>
+          <input type="number" name='max_cust' className='block mx-auto' required />
         </div>
-        <div className='inline-block mx-2'>
-          <label htmlFor="avg-cookies" className='block'>Average Cookies per Sale</label>
-          <input type="number" name='avg-cookies' className='block mx-auto' required />
+        <div className='flex-auto mx-2'>
+          <label htmlFor="avg_cookies" className='block text-center'>Average Cookies per Sale</label>
+          <input type="number" name='avg_cookies' className='block mx-auto' required />
         </div>
-        <button type='submit' className='bg-green-600 p-2'>Create</button>
+        <button type='submit' className='bg-green-600 p-2 mr-2 rounded-sm'>Create</button>
       </div>
     </form>
   );
 }
 
-function CookieReport() {
+function CookieReport(props) {
   return (
     <div>
-      <h3 className='text-center m-4'>Report Table Coming Soon</h3>
-      <p className='text-center m-4'>Last Cookie Stand</p>
+      <h3 className='text-center m-4'>Report Table Coming Soon...</h3>
+      <p className='text-center m-4'>{props.stand}</p>
     </div>
   );
 }
