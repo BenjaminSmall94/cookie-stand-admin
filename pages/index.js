@@ -8,7 +8,7 @@ export default function Home() {
   const { user, login, logout } = useAuth();
 
   if (user) {
-    return <CookieStandAdmin user={user.username} logout={logout} />;
+    return <CookieStandAdmin user={user} logout={logout} />;
   } else {
     return <LoginForm login={login} />
   }
