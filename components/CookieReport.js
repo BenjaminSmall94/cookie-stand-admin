@@ -7,21 +7,21 @@ function CookieReport(props) {
       <h3 className='text-center my-4'>No Cookie Stands Availalbe</h3> :
       <table className='w-1/2 mx-auto my-4'>
         <thead>
-          <tr className='bg-green-500'>
+          <tr className='bg-green-400'>
             <th>Location</th>
             {hours.map((hour, idx) => <th key={idx}>{hour}</th>)}
           </tr>
         </thead>
         <tbody>
           {props.stands.map(stand => (
-            <tr key={stand.id} className={`bg-green-${300 + stand.id % 2 * 100}`}>
+            <tr key={stand.id} className={`bg-green-${200 + stand.id % 2 * 100}`}>
               <td className='border border-black'>{stand.location}</td>
               {hourlySales.map((sales, idx) => <td key={idx} className='border border-black'>{sales}</td>)}
             </tr>
           ))}
         </tbody>
         <tfoot>
-          <tr className='bg-green-500'>
+          <tr className='bg-green-400'>
             <th className='border border-black'>Totals</th>
             {hourlySales.map((sales, idx) => <td key={idx} className='border border-black'>{sales * props.stands.length}</td>)}
           </tr>

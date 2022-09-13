@@ -1,12 +1,16 @@
 import Link from 'next/link'
 
-function Header() {
+function Header(props) {
   return (
-    <header className='flex justify-between items-center bg-green-500 p-3.5'>
+    <header className='flex justify-between items-center bg-green-400 p-3.5'>
       <h1 className='text-4xl'>Cookie Stand Admin</h1>
-      <Link href={'/overview'} >
-        <a className="inline-block bg-gray-100 p-0.5 rounded border border-black">Overview</a>
-      </Link>
+      <div>
+        <p className="inline-block w-20 bg-gray-100 p-0.5 mx-0.5 rounded border border-black text-center">{props.user}</p>
+        <button onClick={props.logout} className="inline-block w-20 text-white bg-green-600 p-0.5 mx-0.5 rounded border border-black">Sign Out</button>
+        <Link href={'/overview'} >
+          <a className="inline-block w-20 bg-gray-100 p-0.5 mx-0.5 rounded border border-black text-center">Overview</a>
+        </Link>
+      </div>
     </header>
   );
 }
