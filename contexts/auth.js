@@ -29,10 +29,11 @@ export function AuthProvider(props) {
 
     const decodedAccess = jwt.decode(response.data.access);
 
+
     const newState = {
       tokens: response.data,
       user: {
-        username: username,  // removed decodedAccess.username an replaced with username
+        username: decodedAccess.username,
         email: decodedAccess.email,
         id: decodedAccess.user_id
       },
