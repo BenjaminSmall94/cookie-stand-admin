@@ -24,7 +24,7 @@ function CookieReport({ stands, loading, onDelete }) {
   if (!loading) {
     return (
       stands.length === 0 ?
-        <h3 className='text-center my-4'>No Cookie Stands Availalbe</h3> :
+        <h3 className='text-center my-4'>No Cookie Stands Available</h3> :
         <table className='w-3/4 mx-auto my-4'>
           <thead>
             <tr className='bg-green-400'>
